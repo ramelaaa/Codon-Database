@@ -116,7 +116,7 @@ void CodonClass::file2()
         else
         {
             cout << "Error, unknown character." << endl;
-            exit(1);
+            return 0;
         }
         
     }
