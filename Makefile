@@ -1,6 +1,6 @@
 CXX = clang++
 CXXFLAGS = -std=c++14 -Wall -Wextra -pedantic
-TARGET = codon_database
+TARGET = codon_database.run
 OBJECTS = main.o CodonClass.o
 
 .PHONY: all run clean
