@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdlib>
 #include <cctype>
+#include <cstddef>
 using namespace std;
 
 void CodonClass::input()
@@ -20,7 +21,7 @@ void CodonClass::input()
         Codon_AA_matches.push_back(line);
     }
 
-    for (int i=0; i < Codon_AA_matches.size(); i++ )
+    for (std::size_t i=0; i < Codon_AA_matches.size(); i++ )
     {
         //if the index contains the name of an amino acid
         if(i % 2 == 0)
@@ -29,7 +30,7 @@ void CodonClass::input()
             bool found = false; 
 
             //check data structure       
-            for (int j=0; j < List.size(); j++)
+            for (std::size_t j=0; j < List.size(); j++)
             {
                 if(List[j].name == Codon_AA_matches[i]){
                     //name is already present in data structure
@@ -53,7 +54,7 @@ void CodonClass::input()
         else
         {  //if the index contains a codon
             //find the amino acid structure
-            for (int j=0; j < List.size(); j++)
+            for (std::size_t j=0; j < List.size(); j++)
             {
                 if(List[j].name == Codon_AA_matches[i-1])
                 {
@@ -83,7 +84,7 @@ void CodonClass::file2()
 
     int z = 0;
     do{
-        for(int i = 0; i<file.length(); i++)
+        for(std::size_t i = 0; i<file.length(); i++)
         {
             if(!isprint(file[i]))
             {
@@ -95,7 +96,7 @@ void CodonClass::file2()
     }while(z<5);
     //cout << file.length() << endl;
     
-    for(int i = 0; i<file.length(); i++)
+    for(std::size_t i = 0; i<file.length(); i++)
     {
         if(file[i] == 'a')
         {
@@ -116,24 +117,24 @@ void CodonClass::file2()
         else
         {
             cout << "Error, unknown character." << endl;
-            return 0;
+            return;
         }
         
     }
-    for(int i =0; i<file.length(); i+=3)
+    for(std::size_t i =0; i<file.length(); i+=3)
     {
         codon = file.substr(i,3);
         Codon_List.push_back(codon);
         codon.erase();
     }
 
-    for(int i = 0; i<List.size(); i++)
+    for(std::size_t i = 0; i<List.size(); i++)
     {   
         Codon temp;
         temp.AAname = List[i].name;
-        for(int j = 0; j<List[i].Codons.size(); j++)
+        for(std::size_t j = 0; j<List[i].Codons.size(); j++)
         {
-            for(int k = 0; k<Codon_List.size(); k++)
+            for(std::size_t k = 0; k<Codon_List.size(); k++)
             {
                 if(Codon_List[k] == List[i].Codons[j])
                 {
@@ -149,7 +150,7 @@ void CodonClass::file2()
 }
 int CodonClass::searchfile2(string AA)
 {
-    for(int i=0; i<List8.size(); i++)
+    for(std::size_t i=0; i<List8.size(); i++)
     {
         if(AA == List8[i].AAname)
         {
@@ -166,10 +167,10 @@ int CodonClass::searchfile2(string AA)
 string CodonClass::Codon_AA_converter(string cdn)
 {
     
-    for(int i=0; i<List.size(); i++)
+    for(std::size_t i=0; i<List.size(); i++)
     {
         
-        for(int j=0; j<List[i].Codons.size(); j++)
+        for(std::size_t j=0; j<List[i].Codons.size(); j++)
         {
             if (cdn == List[i].Codons[j])
             {
@@ -187,12 +188,12 @@ string CodonClass::Codon_AA_converter(string cdn)
 
 vector<string> CodonClass::AA_Codon_converter(string AA)
 {
-    for(int j = 0; j<List.size(); j++)
+    for(std::size_t j = 0; j<List.size(); j++)
     {
         if(List[j].name == AA)
         {
             cout << "The codons are: " << endl;
-            for(int i=0; i<List[j].Codons.size(); i++)
+            for(std::size_t i=0; i<List[j].Codons.size(); i++)
             {
                 cout << i+1 << ". " <<List[j].Codons[i] << " ";
             }
@@ -207,10 +208,10 @@ vector<string> CodonClass::AA_Codon_converter(string AA)
 
 void CodonClass::Display()
 {
-    for(int i=0; i< List.size(); i++)
+    for(std::size_t i=0; i< List.size(); i++)
     {
         cout << List[i].name << ": ";
-        for(int j=0; j<List[i].Codons.size(); j++)
+        for(std::size_t j=0; j<List[i].Codons.size(); j++)
         {
             cout << List[i].Codons[j] << " ";
         } 
